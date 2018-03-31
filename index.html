@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+  <title>Big</title>
+  <link href='big.css' rel='stylesheet' type='text/css' />
+  <link href='highlight.css' rel='stylesheet' type='text/css' />
+  <style>
+    .new-shiny { background: #aaaaaa; }
+    .oneline {
+      white-space: nowrap;
+    }
+  </style>
+  <script src='big.js'></script>
+  <script src='highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class='light'>
+  <div>building <em>interactive</em> cli tools</div>
+  <div><span class="oneline">but... you know...</span> 🌟 <em>smarter</em> 🤓</div>
+  <div><span class="oneline">@<em>mafintosh</em> 🇩🇰</span></div>
+  <div>author of <em>650+</em> modules</div>
+  <div>write lots of <em>cli</em> apps </div>
+  <div>cli apps are <em>neat</em></div>
+  <div><span class="oneline">🧚🏻 lightweight</span></div>
+  <div><span class="oneline">🤖 automatable</span></div>
+  <div>run them on other computers <em>using ssh</em></div>
+  <div>node was made for <em>server</em> apps 🖨️</div>
+  <div>but is actually <em>great for cli</em> 💻</div>
+  <div>
+    <pre>
+      🔥 #!/usr/bin/env node 🔥 
+    </pre>
+  </div>
+  <div>
+    <pre>
+      #!/usr/bin/env node
+      console.log(
+        Number(<em>process.argv[2]</em>) +
+        Number(<em>process.argv[3]</em>)
+      )
+    </pre>
+  </div>
+  <div>
+    what about <em>long running</em> programs? 🏃‍♀️
+  </div>
+  <div>
+    <pre>
+      setInterval(function () {
+        console.log(<em>'time is '</em>, new Date())
+      }, 1000)
+    </pre>
+  </div>
+  <div>
+    <pre>
+      2018-03-30T15:16:0<em>7</em>.831Z
+
+
+    </pre>
+  </div>
+  <div>
+    <pre>
+      2018-03-30T15:16:0<em>7</em>.831Z
+      2018-03-30T15:16:0<em>8</em>.844Z
+
+    </pre>
+  </div>
+  <div>
+    <pre>
+      2018-03-30T15:16:0<em>7</em>.831Z
+      2018-03-30T15:16:0<em>8</em>.844Z
+      2018-03-30T15:16:0<em>9</em>.829Z
+    </pre>
+  </div>
+  <div>
+    we're gonna need a bigger screen 🤔
+  </div>
+  <div>
+    would be cool to update the text <em>in-place</em>.
+  </div>
+  <div>
+    <em>ANSI</em> to the rescue ⛑️
+  </div>
+  <div>
+    <em>ANSI</em> is magic chars you can print to make your terminal <em>... do stuff</em>
+  </div>
+  <div>
+    <span class="oneline"><em><code>'\033['</code></em> + {ansi-code}</span>
+  </div>
+  <div>
+    <span class="oneline"><code><em>\033[5m</em><blink>BLINK</blink><em>\033[0m</em></code></span>
+  </div>
+  <div>
+    <pre>
+      setInterval(function () {
+        console.log(<em>'\033[2Jtime is '</em>, new Date())
+      }, 1000)
+    </pre>
+  </div>
+  <div>
+    <span class="oneline">npm install <em>single-line-log</em></span>
+  </div>
+  <div>
+    <pre>
+      const log = require(<em>'single-line-log'</em>)
+      setInterval(function () {
+        log(<em>'time is '</em> + new Date())
+      }, 1000)
+    </pre>
+  </div>
+  <div>
+    <img src="sll.jpg">
+  </div>
+  <div>
+    simple, easy, <em>works</em>
+  </div>
+  <div>
+    <div style="font-size: 200px">👍</div>
+  </div>
+  <div>
+    updating the screen is <em>expensive</em> 💸
+  </div>
+  <div>
+    leads to <em>bad ux</em>
+  </div>
+  <div>
+    <em>breaks</em> copy-paste
+  </div>
+  <div>
+    (<em>demo</em>)
+  </div>
+  <div>
+    solutions
+  </div>
+  <div>
+    make component based <em>frameworks</em>
+  </div>
+  <div>
+    ncurses <em>etc</em>
+  </div>
+  <div>
+    <em>great</em>, but lots of buy in
+  </div>
+  <div>
+    web <em>frontend</em> had the same journey
+  </div>
+  <div>
+    remember jquery ui?
+  </div>
+  <div>
+    <img src="jquery-ui.jpg">
+  </div>
+  <div>
+    lots of <em>state</em>, lots of <em>coupling</em>
+  </div>
+  <div>
+    today most webdev uses <em>a virtual dom</em>
+  </div>
+  <div>
+    react
+  </div>
+  <div>
+    render your entire application <em>virtually</em>
+  </div>
+  <div>
+    <em>diff</em> with the dom, make <em>minimal</em> updates
+  </div>
+  <div>
+    made things <em>easy to write</em>
+  </div>
+  <div>
+    easy to <em>test</em>
+  </div>
+  <div>
+    <em>fast</em> enough 🤷
+  </div>
+  <div>
+    back to <em>cli</em>
+  </div>
+  <div>
+    virtual dom is just a <em>string</em>
+  </div>
+  <div>
+    use <em>ANSI</em> to produce a diff with <em>prev output</em>
+  </div>
+  <div>
+    <span class="oneline">npm install <em>ansi-diff</em></span>
+  </div>
+  <div>
+    <pre>
+      const diff = require(<em>'ansi-diff'</em>)()
+
+      let out = diff.update(<em>'hello world'</em>)
+      console.log(out) // 'hello'
+    </pre>
+  </div>
+  <div>
+    <pre>
+      out = diff.update(<em>'hello world'</em>)
+      console.log(out) // empty
+    </pre>
+  </div>
+  <div>
+    <pre>
+      out = diff.update(<em>'hello WORLD'</em>)
+      console.log(out) // {ansi-to-x5}+<em>'WORLD'</em>
+    </pre>
+  </div>
+  <div>
+    produces a close to <em>minimal diff</em>
+  </div>
+  <div>
+    cheap to <em>text diff</em>
+  </div>
+  <div>
+    <em>less</em> flicker
+  </div>
+  <div>
+    <em>great</em> for ssh
+  </div>
+  <div>
+    copy-paste <em>works</em>
+  </div>
+  <div>
+    (<em>demo</em>)
+  </div>
+  <div>
+    components are just <em>strings</em>
+  </div>
+  <div>
+    <a class="oneline" href="https://github.com/watson/progress-string">https://github.com/watson/progress-string</a>
+  </div>
+  <div>
+    (<em>demo</em>)
+  </div>
+  <div>
+    accepting <em>interactive input</em> can be tricky
+  </div>
+  <div>
+    have to use <em class="oneline">"raw mode 🍣"</em> on stdin
+  </div>
+  <div>
+    then <em>parse</em> the raw input
+  </div>
+  <div>
+    <span class="oneline">npm install <em>neat-input</em></span>
+  </div>
+  <div>
+    <pre>
+      const input = require(<em>'neat-input'</em>)()
+
+      input.on(<em>'enter'</em>, 
+        line => console.log(<em>'line:'</em>, line)
+      )
+
+      input.on(<em>'update'</em>, 
+        () => console.log(<em>'partial:'</em>, input.line())
+      )
+    </pre>
+  </div>
+  <div>
+    combine <em class="oneline">ansi-diff</em> and <em class="oneline">neat-input</em> to make cli apps in no time
+  </div>
+  <div>
+    <span class="oneline">npm install <em>diffy</em></span>
+  </div>
+  <div>
+    <pre>
+      const diffy = require(<em>'diffy'</em>)()
+      const trim = require(<em>'diffy/trim+newline'</em>)
+
+      setInterval(() => diffy.render(), 100)
+
+      diffy.render(function() {
+        return trim(<em>`
+          hello ...
+          time is </em>${new Date()}<em>
+          that is all
+        `</em>)
+      })
+    </pre>
+  </div>
+  <div>
+    <pre>
+      // bundles neat-input
+      const input = require(<em>'diffy/input'</em>)()
+    </pre>
+  </div>
+  <div>
+    (<em>demo</em>)
+  </div>
+  <div>
+    (<em>more demos</em>)
+  </div>
+  <div>
+    can diff <em>tiny</em> terminals
+  </div>
+  <div>
+    supports terminal <em>resize</em>
+  </div>
+  <div>
+    can diff <em>colored output</em>
+  </div>
+  <div>
+    more components:
+    <a class="oneline" href="https://github.com/watson/menu-string">https://github.com/watson/menu-string</a>
+    <a class="oneline" href="https://github.com/mafintosh/scrollable-string">https://github.com/mafintosh/scrollable-string</a>
+  </div>
+  <div>
+    add your own:
+    <a class="oneline" href="https://github.com/mafintosh/diffy#components">https://github.com/mafintosh/diffy#components</a>
+  </div>
+  <div>
+    thank you
+  </div>
+</body>
+</html>
